@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mimi chat function</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    
+    
+    <h1> All chats !</h1>
+
+    <!-- creating new chat -->
+    <form method="GET"   action="/chat/new">
+
+        <button>New Chat</button>
+    </form>
+    <!-- index -->
+     <%  for(let chat of chats){ %>
+    <div class="chat">
+        <p> From :<%=chat.from %></p>
+        <div class="msg">
+         <p> Message :<%=chat.msg%></p>
+        </div>
+       
+        <p>To:<%=chat.to %></p>
+        <hr>
+        <!-- //here we split on the  behalf of space -->
+        <p><%=chat.created_at.toString().split(" ")[4] %></p>
+        
+        <p><%=chat.created_at.toString().split(" ").slice(0,4).join(" ")  %></p>
+    </div> 
+    
+    
+
+  <% } %>
+</body>
+</html>
+

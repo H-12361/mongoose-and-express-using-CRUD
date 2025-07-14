@@ -1,0 +1,14 @@
+.chat{
+   background-color: green;
+   color: white;
+}
+body{
+    margin: 10px;
+    border-radius: 10px;
+    
+
+}
+.msg{
+    background-color: darkgray;
+    color: red;
+}
