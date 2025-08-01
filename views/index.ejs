@@ -17,12 +17,27 @@
 
         <button>New Chat</button>
     </form>
+
+
     <!-- index -->
      <%  for(let chat of chats){ %>
     <div class="chat">
         <p> From :<%=chat.from %></p>
         <div class="msg">
          <p> Message :<%=chat.msg%></p>
+         <!-- edit route -->
+         <form action="/chats/<%=chat._id%>/edit" method=" POST">
+            <button>Edit </button>
+
+         </form>
+         
+    <!-- delete chat -->
+    
+   <form action="/chats/<%=chat._id%>?_method=DELETE" method="POST">
+    
+        <br>
+        <button>Delete</button>
+    </form>
         </div>
        
         <p>To:<%=chat.to %></p>

@@ -3,6 +3,7 @@ const app =express();
 const mongoose= require("mongoose");
 const path = require("path");
 const Chat  = require("./model/chat.js")
+const methodOverride = require("method-override");//use  for put request send 
 
 
 
@@ -11,6 +12,9 @@ app.set("views", path.join(__dirname,"views"));
 app.set("view engine","ejs");
 //public file ko link karne ke liye 
 app.use(express.static(path.join(__dirname,"public")));
+app.use(methodOverride("_method"));
+
+
 //pass the data 
 app.use(express.urlencoded({extended:true}));
 main().then(()=>{
@@ -54,6 +58,7 @@ app.get("/chat/new",(req,res)=>{
 })
 
 
+
 //Index route
 app.get("/chats", async (req, res) => {
   let chats = await Chat.find(); // plural for clarity
@@ -79,6 +84,36 @@ let chat1 = new Chat({
   .catch((err)=>{
     console.log(err);
   })
+
+
+//edit route
+app.get("/chats/:id/edit",async(req,res)=>{
+  let {id}=req.params;
+  let chat = await Chat.findById(id);
+  res.render("edit.ejs" ,{chat});
+})
+//updated route
+app.put("/chats/:id", async (req, res) => {
+    let { id } = req.params;
+    let { msg: updatedMessage } = req.body; // must match textarea name
+
+    let updatedChat = await Chat.findByIdAndUpdate(
+        id,
+        { msg: updatedMessage },
+        { runValidators: true, new: true }
+    );
+
+    console.log("Updated chat:", updatedChat);
+    res.redirect("/chats");
+});
+
+ // Destroy route
+   app.delete("/chats/:id", async (req, res) => {
+    let { id } = req.params;
+     let deletedchat = await Chat.findByIdAndDelete(id);
+    console.log(deletedchat);
+    res.redirect("/chats");
+});
 
 
 

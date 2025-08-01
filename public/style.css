@@ -1,5 +1,5 @@
 .chat{
-   background-color: green;
+   background-color: rgb(195, 233, 106);
    color: white;
 }
 body{
@@ -9,6 +9,6 @@ body{
 
 }
 .msg{
-    background-color: darkgray;
+    background-color: #f7f4f4;
     color: red;
 }
